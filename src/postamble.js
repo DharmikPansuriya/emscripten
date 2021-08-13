@@ -217,6 +217,8 @@ function callMain(args) {
     // See abortWrapperDepth in preamble.js!
     abortWrapperDepth -= 2; 
 #endif
+
+    return ret;
   }
 }
 #endif // HAS_MAIN
