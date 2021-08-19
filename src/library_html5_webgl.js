@@ -69,7 +69,7 @@ var LibraryHtml5WebGL = {
   '$GL',
 #endif
 #if (USE_PTHREADS && OFFSCREEN_FRAMEBUFFER)
-  'emscripten_sync_run_in_main_thread_2',
+  'emscripten_webgl_create_context_main_thread',
 #endif
   '$JSEvents', '_emscripten_webgl_power_preferences', '$findEventTarget', '$findCanvasEventTarget'],
   // This function performs proxying manually, depending on the style of context that is to be created.
@@ -122,7 +122,7 @@ var LibraryHtml5WebGL = {
           {{{ makeSetValue('attributes', C_STRUCTS.EmscriptenWebGLContextAttributes.renderViaOffscreenBackBuffer, '1', 'i32') }}}
           {{{ makeSetValue('attributes', C_STRUCTS.EmscriptenWebGLContextAttributes.preserveDrawingBuffer, '1', 'i32') }}}
         }
-        return _emscripten_sync_run_in_main_thread_2({{{ cDefine('EM_PROXIED_CREATE_CONTEXT') }}}, target, attributes);
+        return _emscripten_webgl_create_context_main_thread(target, attributes);
       }
     }
 #endif
