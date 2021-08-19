@@ -569,8 +569,15 @@ Module["preloadedWasm"] = {}; // maps url to wasm instance exports
 /** @param {string|number=} what */
 function abort(what) {
 #if expectToReceiveOnModule('onAbort')
-  if (Module['onAbort']) {
-    Module['onAbort'](what);
+#if USE_PTHREADS
+  if (ENVIRONMENT_IS_PTHREAD) {
+    postMessage({ 'cmd': 'onAbort', 'arg': what});
+  } else
+#endif
+  {
+    if (Module['onAbort']) {
+      Module['onAbort'](what);
+    }
   }
 #endif
 
